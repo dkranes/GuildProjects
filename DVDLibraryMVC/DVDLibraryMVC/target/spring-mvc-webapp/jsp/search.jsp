@@ -25,8 +25,8 @@
 
                 </ul>    
             </div>
-                    
-                    
+
+
             <div class="row">
                 <div class="col-md-6">
                     <h2>My Dvds</h2>
@@ -212,7 +212,40 @@
                 </div>
             </div>
         </div>
-    </div>        
+    </div>
+
+
+    <div class="modal fade" id="editNoteModal" tabindex="-1" role="dialog" aria-labelledby="detailsModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span aria-hidden="true">&times;</span>
+                        <span class="sr-only">Close</span>
+                    </button>
+                    <h4 class="modal-title" id="detailsModalLabel">Edit Dvd User Note</h4>
+                </div>
+                <div class="modal-body">
+                    <h3 id="dvd-id"></h3>
+                    <form class="form-horizontal" role="form">
+                        <div class="form-group">
+                            <label for="edit-user-note" class="col-md-4 control-label">User Note</label> 
+                            <div class="col-md-8">
+                                <input type="text" class="form-control" id="edit-userxx-note" placeholder="User Note"/>
+                            </div>
+                        </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-offset-4 col-md-8">
+                        <button type="submit" id="edit-note-button" class="btn btn-default" data-dismiss="modal">Edit User Note</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                        <input type="hidden" id="edit-note-dvd-id"/>
+                    </div>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
 
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="${pageContext.request.contextPath}/js/jquery-1.11.1.min.js"></script>

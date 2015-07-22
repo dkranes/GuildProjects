@@ -153,7 +153,7 @@ $('#detailsModal').on('show.bs.modal', function (event) {
         modal.find('#dvd-mpaa-rating').text(dvd.mpaaRating);
         modal.find('#dvd-director-name').text(dvd.directorName);
         modal.find('#dvd-studio').text(dvd.studio);
-        modal.find('#dvd-user-note').text(dvd.userNote);
+        modal.find('#dvd-user-note').text(dvd.allUserNotes.toString());
     });
 
 });
@@ -292,7 +292,7 @@ $('#search-button').click(function (event) {
         url: 'search/dvds',
         data: JSON.stringify({
             title: $('#search-title').val(),
-            releaseDate: $('#search-release-date').date(),
+            releaseDate: $('#search-release-date').val(),
             mpaaRating: $('#search-mpaa-rating').val(),
             directorName: $('#search-director-name').val(),
             studio: $('#search-studio').val(),
@@ -306,7 +306,7 @@ $('#search-button').click(function (event) {
     }).success(function (data, status)
     {
         $('#search-title').val('');
-        $('#search-release-date').date('');
+        $('#search-release-date').val('');
         $('#search-mpaa-rating').val('');
         $('#search-director-name').val('');
         $('#search-studio').val('');
