@@ -7,6 +7,7 @@ package com.swcguild.dvdlibrarymvc.controller;
 
 import com.swcguild.dvdlibrarymvc.dao.DvdLibraryDao;
 import com.swcguild.dvdlibrarymvc.model.Dvd;
+import java.util.ArrayList;
 import javax.inject.Inject;
 import javax.validation.Valid;
 import org.springframework.http.HttpStatus;
@@ -76,6 +77,14 @@ public class HomeController {
     @ResponseBody
     public Dvd[] getAllDvds() {
         return dao.getAllDVDs();
+    }
+    
+    @RequestMapping(value = "/dvdNotes/{id}", method = RequestMethod.GET)
+    @ResponseBody
+    public ArrayList<String>getAllNotesByDvdId(@PathVariable("id") int id){
+        
+        return dao.findDVDByID(id).getAllUserNotes();
+        
     }
 
 }

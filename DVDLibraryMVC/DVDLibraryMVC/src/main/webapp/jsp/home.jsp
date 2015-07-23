@@ -197,7 +197,7 @@
                                     <input type="text" class="form-control" id="edit-studio" placeholder="Studio"/>
                                 </div>
                             </div>
-                           <div class="form-group">
+                            <div class="form-group">
                                 <label for="edit-user-note" class="col-md-4 control-label"></label> 
                                 <div class="col-md-8">
                                     <input type="hidden" class="form-control" id="edit-user-note" placeholder="User Note"/>
@@ -235,6 +235,18 @@
                                     <input type="text" class="form-control" id="edit-userxx-note" placeholder="User Note"/>
                                 </div>
                             </div>
+                            <table class="table table-bordered" id="editTable">
+                                <thead>
+                                <tr>
+                                    <th>User Note</th>
+                                    <th>Action</th>
+                                </tr> 
+                                </thead>
+                                <tbody>
+                                    
+                                </tbody>
+                            </table>
+                        </form>
                     </div>
                     <div class="form-group">
                         <div class="col-md-offset-4 col-md-8">
