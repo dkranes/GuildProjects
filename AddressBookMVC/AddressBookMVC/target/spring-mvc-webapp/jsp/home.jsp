@@ -27,107 +27,106 @@
                 <ul class="nav nav-tabs">
                     <li role="presentation" class="active"><a href="${pageContext.request.contextPath}/home">Home</a></li>
                     <li role="presentation"><a href="${pageContext.request.contextPath}/search">Search</a></li>
-                    <li role="presentation"><a href="${pageContext.request.contextPath}/stats">Stats</a></li>
                     <li role="presentation"><a href="${pageContext.request.contextPath}/displayAddressBookNoAjax">Address Book (No Ajax)</a></li>
                 </ul>    
             </div>
-        
 
 
-        <div class="row">
 
-            <div class="col-md-6">
-                <h2>My Address Book</h2>
-                <table id="contactTable" class="table table-hover">
-                    <tr>
-                        <th width="40%">Contact Name</th>
-                        <th width="30%">City</th>
-                        <th width="15%"></th>
-                        <th width="15%"></th>
-                    </tr>
+            <div class="row">
 
-                    <tbody id="contentRows"></tbody>
-                </table>
-            </div> 
+                <div class="col-md-6">
+                    <h2>My Address Book</h2>
+                    <table id="contactTable" class="table table-hover">
+                        <tr>
+                            <th width="40%">Contact Name</th>
+                            <th width="30%">City</th>
+                            <th width="15%"></th>
+                            <th width="15%"></th>
+                        </tr>
 
-            <div class="col-md-6">
-                <h2>Add New Address</h2>
-                <form class="form-horizontal" role="form">
-                    <div class="form-group">
-                        <label for="add-first-name" class="col-md-4 control-label">
-                            First Name:
-                        </label>
-                        <div class="col-md-8">
-                            <input type="text" 
-                                   class="form-control" 
-                                   id="add-first-name" 
-                                   placeholder="First Name"/>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="add-last-name" class="col-md-4 control-label">
-                            Last Name:
-                        </label>
-                        <div class="col-md-8">
-                            <input type="text" 
-                                   class="form-control" 
-                                   id="add-last-name" 
-                                   placeholder="Last Name"/>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="add-street" class="col-md-4 control-label">
-                            Street:
-                        </label>
-                        <div class="col-md-8">
-                            <input type="text" 
-                                   class="form-control" 
-                                   id="add-street" 
-                                   placeholder="Street"/>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="add-city" class="col-md-4 control-label">City:</label>
-                        <div class="col-md-8">
-                            <input type="city" 
-                                   class="form-control" 
-                                   id="add-city" 
-                                   placeholder="City"/>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="add-state" class="col-md-4 control-label">State:</label>
-                        <div class="col-md-8">
-                            <input type="tel" 
-                                   class="form-control" 
-                                   id="add-state" 
-                                   placeholder="State"/>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="add-zip" class="col-md-4 control-label">Zip:</label>
-                        <div class="col-md-8">
-                            <input type="tel" 
-                                   class="form-control" 
-                                   id="add-zip" 
-                                   name="zip" 
-                                   placeholder="Zip"/>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-md-offset-4 col-md-8">
-                            <button type="submit" 
-                                    id="add-button" 
-                                    class="btn btn-default">
-                                Create Contact
-                            </button>
-                        </div>
-                    </div>
-                </form>
-                <div id="validationErrors" style="color: red"/>
-            </div> 
+                        <tbody id="contentRows"></tbody>
+                    </table>
+                </div> 
 
-        </div>            
+                <div class="col-md-6">
+                    <h2>Add New Address</h2>
+                    <form class="form-horizontal" role="form">
+                        <div class="form-group">
+                            <label for="add-first-name" class="col-md-4 control-label">
+                                First Name:
+                            </label>
+                            <div class="col-md-8">
+                                <input type="text" 
+                                       class="form-control" 
+                                       id="add-first-name" 
+                                       placeholder="First Name"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="add-last-name" class="col-md-4 control-label">
+                                Last Name:
+                            </label>
+                            <div class="col-md-8">
+                                <input type="text" 
+                                       class="form-control" 
+                                       id="add-last-name" 
+                                       placeholder="Last Name"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="add-street" class="col-md-4 control-label">
+                                Street:
+                            </label>
+                            <div class="col-md-8">
+                                <input type="text" 
+                                       class="form-control" 
+                                       id="add-street" 
+                                       placeholder="Street"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="add-city" class="col-md-4 control-label">City:</label>
+                            <div class="col-md-8">
+                                <input type="city" 
+                                       class="form-control" 
+                                       id="add-city" 
+                                       placeholder="City"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="add-state" class="col-md-4 control-label">State:</label>
+                            <div class="col-md-8">
+                                <input type="tel" 
+                                       class="form-control" 
+                                       id="add-state" 
+                                       placeholder="State"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="add-zip" class="col-md-4 control-label">Zip:</label>
+                            <div class="col-md-8">
+                                <input type="tel" 
+                                       class="form-control" 
+                                       id="add-zip" 
+                                       name="zip" 
+                                       placeholder="Zip"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-offset-4 col-md-8">
+                                <button type="submit" 
+                                        id="add-button" 
+                                        class="btn btn-default">
+                                    Create Contact
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="validationErrors" style="color: red"/>
+                </div> 
+                <div id="editValidationErrors" style="color: red"/>
+            </div>            
         </div>
     </div>
 
@@ -173,16 +172,16 @@
             </div>
         </div>
     </div>
-    
+
     <div class="modal fade" id="editModal" tabindex="-1" role="dialog" 
-         aria-labelledby="detailsModalLabel" aria-hidden="true">
+         aria-labelledby="editModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">
                         <span aria-hidden="true">&times;</span>
                         <span class="sr-only">Close</span></button>
-                    <h4 class="modal-title" id="detailsModalLabel">Edit Contact</h4>
+                    <h4 class="modal-title" id="editModalLabel">Edit Contact</h4>
                 </div>
                 <div class="modal-body">
                     <h3 id="contact-id"></h3>
@@ -256,11 +255,12 @@
                             </div>
                         </div>
                     </form>
+
                 </div>
             </div>
         </div>
     </div>
-    
+
     <script src="${pageContext.request.contextPath}/js/jquery-1.11.1.min.js"></script>
     <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
     <script src="${pageContext.request.contextPath}/js/addressBook.js"></script>

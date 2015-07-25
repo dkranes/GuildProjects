@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>DVD Controller Page</title>
+        <title>DVD Library</title>
         <!-- Bootstrap core CSS -->
         <link href="${pageContext.request.contextPath}/css/bootstrap.min.css" rel="stylesheet">
 
@@ -21,7 +21,8 @@
             <div class="navbar">
                 <ul class="nav nav-tabs">
                     <li role="presentation"><a href="${pageContext.request.contextPath}/home">Home</a></li>
-                    <li role="presentation" class="active"><a href="${pageContext.request.contextPath}/displayDvdLibrary">Dvd Controller</a></li>
+                    <li role="presentation" class="active"><a href="${pageContext.request.contextPath}/displayDvdLibrary">Home (non-Ajax)</a></li>
+                    <li role="presentation"><a href="${pageContext.request.contextPath}/search">Search DVD Library</a></li>
 
                 </ul>    
             </div>

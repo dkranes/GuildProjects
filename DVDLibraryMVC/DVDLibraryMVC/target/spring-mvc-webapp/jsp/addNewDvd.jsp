@@ -20,7 +20,8 @@
             <div class="navbar">
                 <ul class="nav nav-tabs">
                     <li role="presentation"><a href="${pageContext.request.contextPath}/home">Home</a></li>
-                    <li role="presentation" class="active"><a href="${pageContext.request.contextPath}/displayDvdLibrary">Dvd Controller</a></li>
+                    <li role="presentation" class="active"><a href="${pageContext.request.contextPath}/displayDvdLibrary">Home (non-Ajax)</a></li>
+                    <li role="presentation"><a href="${pageContext.request.contextPath}/search">Search DVD Library</a></li>
 
                 </ul>    
             </div>
@@ -48,7 +49,7 @@
                     <div class="form-group">
                         <label for="add-releaseDate" class="col-md-4 control-label">Release Date:</label>
                         <div class="col-md-8">
-                            <input type="text"
+                            <input type="date"
                                    class="form-control"
                                    id="add-releaseDate"
                                    name="releaseDate"

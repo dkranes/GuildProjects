@@ -10,7 +10,9 @@ $(document).ready(function () {
     $('#add-button').on('click', function (e) {
 
         e.preventDefault();
-
+        clearAddErrorMsg();
+        clearEditErrorMsg();
+        
         $.ajax({
             type: 'POST',
             url: 'address',
@@ -49,6 +51,129 @@ $(document).ready(function () {
 
         });
     });
+
+
+    $('#detailsModal').on('show.bs.modal', function (event) {
+
+        var element = $(event.relatedTarget);
+
+        var contactId = element.data('contact-id');
+
+        var modal = $(this);
+
+        $.ajax({
+            type: 'GET',
+            url: 'address/' + contactId
+
+        }).success(function (contact) {
+            modal.find('#contact-id').text(contact.contactId);
+            modal.find('#contact-firstName').text(contact.firstName);
+            modal.find('#contact-lastName').text(contact.lastName);
+            modal.find('#contact-street').text(contact.street);
+            modal.find('#contact-city').text(contact.city);
+            modal.find('#contact-state').text(contact.state);
+            modal.find('#contact-zip').text(contact.zip);
+
+        });
+
+
+    });
+
+    $('#editModal').on('show.bs.modal', function (event) {
+
+        var element = $(event.relatedTarget);
+
+        var contactId = element.data('contact-id');
+
+        var modal = $(this);
+
+        $.ajax({
+            type: 'GET',
+            url: 'address/' + contactId
+        }).success(function (contact) {
+            modal.find('#contact-id').text(contact.contactId);
+            modal.find('#edit-contact-id').val(contact.contactId);
+            modal.find('#edit-first-name').val(contact.firstName);
+            modal.find('#edit-last-name').val(contact.lastName);
+            modal.find('#edit-street').val(contact.street);
+            modal.find('#edit-city').val(contact.city);
+            modal.find('#edit-state').val(contact.state);
+            modal.find('#edit-zip').val(contact.zip);
+        });
+
+    });
+
+    $('#edit-button').on('click', function (event) {
+
+        event.preventDefault();
+        clearEditErrorMsg();
+        $.ajax({
+            type: 'PUT',
+            url: 'address/' + $('#edit-contact-id').val(),
+            data: JSON.stringify(
+                    {
+                        contactId: $('#edit-contact-id').val(),
+                        firstName: $('#edit-first-name').val(),
+                        lastName: $('#edit-last-name').val(),
+                        street: $('#edit-street').val(),
+                        city: $('#edit-city').val(),
+                        state: $('#edit-state').val(),
+                        zip: $('#edit-zip').val()
+                    }),
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            'dataType': 'json'
+        }).success(function (data, status) {
+//            
+            loadAddresses();
+
+        }).error(function (data, status) {
+            var errors = data.responseJSON.fieldErrors;
+            clearAddErrorMsg();
+            clearEditErrorMsg();
+            $.each(errors, function (index, validationError) {
+                var errorDiv = $('#editValidationErrors');
+                errorDiv.append(validationError.message).append($('<br>'));
+
+            });
+
+        });
+
+    });
+
+    $('#search-button').click(function (event) {
+        event.preventDefault();
+        $.ajax({
+            type: 'POST',
+            url: 'search/addresses',
+            data: JSON.stringify({
+                firstName: $('#search-first-name').val(),
+                lastName: $('#search-last-name').val(),
+                street: $('#search-street').val(),
+                city: $('#search-city').val(),
+                state: $('#search-state').val(),
+                zip: $('#search-zip').val(),
+            }),
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            'dataType': 'json'
+        }).success(function (data, status) {
+            $('#search-first-name').val('');
+            $('#search-last-name').val('');
+            $('#search-street').val('');
+            $('#search-city').val('');
+            $('#search-state').val('');
+            $('#search-zip').val('');
+
+            fillAddressTable(data, status);
+
+        });
+    });
+
 
 });
 
@@ -100,83 +225,13 @@ function clearAddressTable()
     $('#contentRows').empty();
 }
 
-$('#detailsModal').on('show.bs.modal', function (event) {
+function clearEditErrorMsg() {
+    $('#editValidationErrors').empty();
+}
 
-    var element = $(event.relatedTarget);
-
-    var contactId = element.data('contact-id');
-
-    var modal = $(this);
-
-    $.ajax({
-        type: 'GET',
-        url: 'address/' + contactId
-
-    }).success(function (contact) {
-        modal.find('#contact-id').text(contact.contactId);
-        modal.find('#contact-firstName').text(contact.firstName);
-        modal.find('#contact-lastName').text(contact.lastName);
-        modal.find('#contact-street').text(contact.street);
-        modal.find('#contact-city').text(contact.city);
-        modal.find('#contact-state').text(contact.state);
-        modal.find('#contact-zip').text(contact.zip);
-
-    });
-
-
-});
-
-$('#editModal').on('show.bs.modal', function (event) {
-
-    var element = $(event.relatedTarget);
-
-    var contactId = element.data('contact-id');
-
-    var modal = $(this);
-
-    $.ajax({
-        type: 'GET',
-        url: 'address/' + contactId
-    }).success(function (contact) {
-        modal.find('#contact-id').text(contact.contactId);
-        modal.find('#edit-contact-id').val(contact.contactId);
-        modal.find('#edit-first-name').val(contact.firstName);
-        modal.find('#edit-last-name').val(contact.lastName);
-        modal.find('#edit-street').val(contact.street);
-        modal.find('#edit-city').val(contact.city);
-        modal.find('#edit-state').val(contact.state);
-        modal.find('#edit-zip').val(contact.zip);
-    });
-
-});
-
-$('#edit-button').click(function (event) {
-
-    event.preventDefault();
-
-    $.ajax({
-        type: 'PUT',
-        url: 'address/' + $('#edit-contact-id').val(),
-        data: JSON.stringify(
-                {
-                    contactId: $('#edit-contact-id').val(),
-                    firstName: $('#edit-first-name').val(),
-                    lastName: $('#edit-last-name').val(),
-                    street: $('#edit-street').val(),
-                    city: $('#edit-city').val(),
-                    state: $('#edit-state').val(),
-                    zip: $('#edit-zip').val()
-                }),
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-        },
-        'dataType': 'json'
-    }).success(function () {
-        loadAddresses();
-    });
-
-});
+function clearAddErrorMsg() {
+    $('#validationErrors').empty();
+}
 
 function deleteAddress(id) {
     var answer = confirm("Do you really want to delete this address?");
@@ -191,35 +246,5 @@ function deleteAddress(id) {
     }
 }
 
-$('#search-button').click(function (event) {
-    event.preventDefault();
-    $.ajax({
-        type: 'POST',
-        url: 'search/addresses',
-        data: JSON.stringify({
-            firstName: $('#search-first-name').val(),
-            lastName: $('#search-last-name').val(),
-            street: $('#search-street').val(),
-            city: $('#search-city').val(),
-            state: $('#search-state').val(),
-            zip: $('#search-zip').val(),
-        }),
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-        },
-        'dataType': 'json'
-    }).success(function (data, status) {
-        $('#search-first-name').val('');
-        $('#search-last-name').val('');
-        $('#search-street').val('');
-        $('#search-city').val('');
-        $('#search-state').val('');
-        $('#search-zip').val('');
-
-        fillAddressTable(data, status);
-
-    });
-});
 
 

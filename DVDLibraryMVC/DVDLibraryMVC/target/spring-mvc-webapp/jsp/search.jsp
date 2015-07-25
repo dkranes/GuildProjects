@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Hello Controller Page</title>
+        <title>Search DVD Library</title>
         <!-- Bootstrap core CSS -->
         <link href="${pageContext.request.contextPath}/css/bootstrap.min.css" rel="stylesheet">
 
@@ -21,7 +21,7 @@
                 <ul class="nav nav-tabs">
                     <li role="presentation"><a href="${pageContext.request.contextPath}/home">Home</a></li>
                     <li role="presentation"><a href="${pageContext.request.contextPath}/displayDvdLibrary">Dvd Controller</a></li>
-                    <li role="presentation"class="active"><a href="${pageContext.request.contextPath}/search">Search Controller</a></li>
+                    <li role="presentation"class="active"><a href="${pageContext.request.contextPath}/search">Search DVD Library</a></li>
 
                 </ul>    
             </div>
@@ -56,7 +56,7 @@
                                 Release Date:
                             </label>
                             <div class="col-md-8">
-                                <input type="text" class="form-control" id="search-release-date" placeholder="Release Date">
+                                <input type="date" class="form-control" id="search-release-date" placeholder="Release Date">
                             </div>
                         </div>
                         <div class="form-group">

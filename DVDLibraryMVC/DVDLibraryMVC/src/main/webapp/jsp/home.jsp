@@ -20,8 +20,8 @@
             <div class="navbar">
                 <ul class="nav nav-tabs">
                     <li role="presentation" class="active"><a href="${pageContext.request.contextPath}/home">Home</a></li>
-                    <li role="presentation"><a href="${pageContext.request.contextPath}/displayDvdLibrary">Dvd Controller</a></li>
-                    <li role="presentation"><a href="${pageContext.request.contextPath}/search">Search Controller</a></li>
+                    <li role="presentation"><a href="${pageContext.request.contextPath}/displayDvdLibrary">Home (non-Ajax)</a></li>
+                    <li role="presentation"><a href="${pageContext.request.contextPath}/search">Search DVD Library</a></li>
                 </ul>    
             </div>
             <div class="row">
@@ -230,7 +230,7 @@
                         <h3 id="dvd-id"></h3>
                         <form class="form-horizontal" role="form">
                             <div class="form-group">
-                                <label for="edit-user-note" class="col-md-4 control-label">User Note</label> 
+                                <label for="edit-userxx-note" class="col-md-4 control-label">User Note</label> 
                                 <div class="col-md-8">
                                     <input type="text" class="form-control" id="edit-userxx-note" placeholder="User Note"/>
                                 </div>

@@ -7,7 +7,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="s" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-
 <%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -38,6 +37,7 @@
                     <div class="col-md-8">
                         <sf:input type="text" class="form-control" id="add-first-name" 
                                   path="firstName" placeholder="First Name"/>
+                        <sf:errors path="firstName" cssclass="error"></sf:errors>
                     </div>
                 </div>
                 <div class="form-group">
@@ -45,6 +45,7 @@
                     <div class="col-md-8">
                         <sf:input type="text" class="form-control" id="add-last-name" 
                                   path="lastName" placeholder="Last Name"/>
+                        <sf:errors path="lastName" cssclass="error"></sf:errors>
                     </div>
                 </div>
                 <div class="form-group">
@@ -52,6 +53,7 @@
                     <div class="col-md-8">
                         <sf:input type="text" class="form-control" id="add-street" 
                                   path="street" placeholder="Street"/>
+                        <sf:errors path="street" cssclass="error"></sf:errors>
                     </div>
                 </div>
                 <div class="form-group">
@@ -59,6 +61,7 @@
                     <div class="col-md-8">
                         <sf:input type="city" class="form-control" id="add-city" 
                                   path="city" placeholder="City"/>
+                        <sf:errors path="city" cssclass="error"></sf:errors>
                     </div>
                 </div>
                 <div class="form-group">
@@ -66,6 +69,7 @@
                     <div class="col-md-8">
                         <sf:input type="tel" class="form-control" id="add-state" 
                                   path="state" placeholder="State"/>
+                        <sf:errors path="state" cssclass="error"></sf:errors>
                     </div>
                 </div>
                     <div class="form-group">
@@ -73,6 +77,7 @@
                     <div class="col-md-8">
                         <sf:input type="tel" class="form-control" id="add-zip" 
                                   path="zip" placeholder="Zip"/>
+                        <sf:errors path="zip" cssclass="error"></sf:errors>
                         <sf:hidden path="contactId"/>
                     </div>
                 </div>

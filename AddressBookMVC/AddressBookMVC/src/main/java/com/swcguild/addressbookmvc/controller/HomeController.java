@@ -60,11 +60,14 @@ public class HomeController {
     
     @RequestMapping(value = "/address/{id}", method = RequestMethod.PUT)
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void putContact(@PathVariable("id") int id, @RequestBody Contact contact) {
+    @ResponseBody
+    public Contact putContact(@PathVariable("id") int id, @Valid @RequestBody Contact contact) {
         
         contact.setContactId(id);
        
         dao.updateContact(contact);
+        
+        return contact;
     }
     
     @RequestMapping(value = "/addresses", method = RequestMethod.GET)

@@ -68,7 +68,7 @@ public class HomeController {
 
     @RequestMapping(value = "/dvd/{id}", method = RequestMethod.PUT)
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void editDvd(@PathVariable("id") int id, @RequestBody Dvd dvd) {
+    public void editDvd(@Valid @PathVariable("id") int id, @RequestBody Dvd dvd) {
         dvd.setDvdId(id);
         dao.updateDVD(dvd);
     }

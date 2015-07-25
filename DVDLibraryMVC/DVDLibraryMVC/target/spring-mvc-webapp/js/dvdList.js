@@ -71,6 +71,7 @@ function loadDVDLibrary() {
 function clearDvdTable()
 {
     $('#contentRows').empty();
+    $('#editTable tbody').empty();
 }
 
 
@@ -92,17 +93,17 @@ function deleteDvd(id)
 function editDvdNote(id)
 {
     var answer = confirm("Do you really want to edit this note?")
-    
-    if (answer == true){
-        
+
+    if (answer == true) {
+
         $.ajax({
             type: 'POST',
             url: 'dvdNotes/' + id
-        }).success(function (){
-            
+        }).success(function () {
+
         });
     }
-    
+
 }
 
 
@@ -238,6 +239,14 @@ $(document).ready(function () {
         }).success(function () {
             loadDVDLibrary();
 
+        }).error(function (data, status) {
+            var errors = data.responseJSON.fieldErrors;
+            $('#validationErrors').empty();
+            $.each(errors, function (index, validationError) {
+                var errorDiv = $('#validationErrors');
+                errorDiv.append(validationError.message).append($('<br>'));
+            });
+
         });
 
 
@@ -250,42 +259,37 @@ $(document).ready(function () {
         var dvdId = element.data('dvd-id');
 
         var modal = $(this);
-        
+
         var notes = element.data('dvd-user-note');
-        
+
         var noteTable = $('#dvd-user-note-table');
 
         $.ajax({
             type: 'GET',
             url: 'dvdNotes/' + dvdId
-        }).success(function (dvdNotes) {
+        }).success(function (dvdNotes, dvd) {
             modal.find('#dvd-id').text(dvdId);
             modal.find('#edit-note-dvd-id').val(dvdId);
-            //modal.find('#edit-title').text(dvd.title);
-            
-                $.each(dvdNotes, function(index, note){
+
+                $.each(dvdNotes, function (index, note) {
                     $('#editTable tbody')
                             .append($('<tr/>')
                             .append($('<td/>').text(note))
                             .append($('<td/>')
                             .append($('<button class="btn btn-edit"></button>').text('Edit'))
-                            .append($('<button class="btn btn-delete"></button>').text('Delete'))))
-                    
-                    
-                }) 
-           
-           
+                            .append($('<button class="btn btn-delete"></button>').text('Delete'))));
+
+                });
             
-            // modal.find('#edit-user-note').val(dvd.userNote);
         });
-        
+        $('#editTable tbody').empty();
 
     });
-    
-    $('#editTable tbody').on('click', '.btn-edit' function(e){
-        e.preventDefault();
-        
-    });
+
+//    $('#editTable tbody').on('click', '.btn-edit' function(e){
+//        e.preventDefault();
+//        
+//    });
 
 
     $('#edit-note-button').on('click', function (e) {
@@ -308,7 +312,9 @@ $(document).ready(function () {
 
             //$('#edit-user-note').val('');    //.concat($('#add-user-note'));
 
-            loadDVDLibrary();
+            //loadDVDLibrary();
+            //$('#editTable tbody').empty();
+            //clearDvdTable();
         });
     });
 

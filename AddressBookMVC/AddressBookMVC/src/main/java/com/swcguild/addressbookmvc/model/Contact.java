@@ -17,21 +17,27 @@ public class Contact {
 
     
     private int contactId;
+    
     @NotEmpty(message="You must supply a value for First Name.")
     @Length(max=50, message="First Name must be no more than 50 characters in length.")
     private String firstName;
+    
     @NotEmpty(message="You must supply a value for Last Name.")
     @Length(max=50, message="Last Name must be no more than 50 characters in length.")
     private String lastName;
-    @NotEmpty(message="You must supply a value for Street Name.")
+    
+    @NotEmpty(message="You must supply a value for Street Address.")
     @Length(max=50, message="Street Name must be no more than 50 characters in length.")
     private String street;
-    @NotEmpty(message="You must supply a value for City Name.")
+    
+    @NotEmpty(message="You must supply a value for City.")
     @Length(max=50, message="City Name must be no more than 50 characters in length.")
     private String city;
-    @NotEmpty(message="You must supply a value for State Name.")
+    
+    @NotEmpty(message="You must supply a value for State.")
     @Length(max=20, message="State Name must be no more than 20 characters in length.")
     private String state;
+    
     @NotEmpty(message="You must supply a value for Zip Code.")
     @Length(max=5, message="Zip Code must be no more than 5 characters in length.")
     private String zip;
