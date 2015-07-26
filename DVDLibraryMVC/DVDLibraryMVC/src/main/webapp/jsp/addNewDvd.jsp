@@ -1,6 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="s" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -32,8 +33,9 @@
                 <a href="displayDvdLibrary">Dvd List</a> <br/>
                 <hr/>
 
-                <form class="form-horizontal"
+                <sf:form class="form-horizontal"
                       role="form"
+                      modelAttribute="dvd"
                       action="addNewDvd"
                       method="POST">
                     <div class="form-group">
@@ -44,6 +46,7 @@
                                    id="add-title"
                                    name="title"
                                    placeholder="Title" />
+                            <sf:errors path="title" cssClass="error"></sf:errors>
                         </div>
                     </div>
                     <div class="form-group">
@@ -54,6 +57,7 @@
                                    id="add-releaseDate"
                                    name="releaseDate"
                                    placeholder="Release Date" />
+                            <sf:errors path="releaseDate" cssClass="error" ></sf:errors>
                         </div>
                     </div>
                     <div class="form-group">
@@ -64,6 +68,7 @@
                                    id="add-mpaaRating"
                                    name="mpaaRating"
                                    placeholder="MPAA Rating" />
+                        <sf:errors path="mpaaRating" cssClass="error" ></sf:errors>
                         </div>
                     </div>
                     <div class="form-group">
@@ -74,6 +79,7 @@
                                    id="add-directorName"
                                    name="directorName"
                                    placeholder="Director Name" />
+                            <sf:errors path="directorName" cssClass="error"></sf:errors>
                         </div>
                     </div>
                     <div class="form-group">
@@ -84,6 +90,7 @@
                                    id="add-studio"
                                    name="studio"
                                    placeholder="Studio" />
+                            <sf:errors path="studio" cssClass="error"></sf:errors>
                         </div>
                     </div>
                     <div class="form-group">
@@ -94,6 +101,7 @@
                                    id="add-note"
                                    name="userNote"
                                    placeholder="Note" />
+                            <sf:errors path="userNote" cssClass="error"></sf:errors>
                         </div>
                     </div>
                     <div class="form-group">
@@ -103,7 +111,7 @@
                                     class="btn btn-default">Add New DVD</button>
                         </div>
                     </div>
-                </form>
+                </sf:form>
             </div>
         </div>
         <!-- Placed at the end of the document so the pages load faster -->

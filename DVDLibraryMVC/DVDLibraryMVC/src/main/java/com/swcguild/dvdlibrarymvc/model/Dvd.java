@@ -8,22 +8,35 @@ package com.swcguild.dvdlibrarymvc.model;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Objects;
+import javax.validation.constraints.Future;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Past;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
+import org.springframework.context.annotation.Lazy;
+import org.springframework.format.annotation.DateTimeFormat;
 
 /**
  *
  * @author apprentice
  */
 public class Dvd {
+    
+    private String userNote;
+
+    private ArrayList<String> allUserNotes = new ArrayList<String>();
+    private Object TemporalType;
 
     @NotEmpty(message = "You must supply a value for Title")
     @Length(max = 50, message = "Title must be no more than 50 characters")
     private String title;
 
-//    @NotEmpty(message = "You must supply a value for ReleaseDate")
-//    @Length(max = 50, message = "Title must be no more than 50 characters")
-//    private String releaseDate;
+    @NotNull(message = "You must supply a value for Release Date")
+    @DateTimeFormat(pattern = "MM-dd-yyyy")
+    //@Temporal(TemporalType.DATE)
+    @Past(message = "You must supply a value for Release Date")
+    //@Future(message = "You must supply a current or past date for Release Date...bitch")
+    //@Lazy
     private Date releaseDate;
 
     @NotEmpty(message = "You must supply a value for MPAA Rating")
@@ -39,9 +52,7 @@ public class Dvd {
 
     //@NotEmpty(message = "You must supply a value for User Note")
     //@Length(max = 50, message = "User Note must be no more than 50 characters")
-    private String userNote;
-
-    private ArrayList<String> allUserNotes = new ArrayList<String>();
+    
 
     @Override
     public int hashCode() {

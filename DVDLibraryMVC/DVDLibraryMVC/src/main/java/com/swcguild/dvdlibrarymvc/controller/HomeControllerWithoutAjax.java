@@ -3,14 +3,22 @@ package com.swcguild.dvdlibrarymvc.controller;
 import com.swcguild.dvdlibrarymvc.dao.DvdLibraryDao;
 import com.swcguild.dvdlibrarymvc.model.Dvd;
 import java.io.IOException;
-import java.time.LocalDate;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -20,15 +28,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class HomeControllerWithoutAjax {
 
     private DvdLibraryDao dao;
-    static int counter=0;
+    static int counter = 0;
 
     @Inject
     public HomeControllerWithoutAjax(DvdLibraryDao dao) {
         this.dao = dao;
-        
+
     }
-    
-    
 
 //    @RequestMapping(value="/loadSampleDvds", method=RequestMethod.POST)
 //    public String loadSampleDvds () throws ParseException, FileNotFoundException {
@@ -43,14 +49,11 @@ public class HomeControllerWithoutAjax {
 //        
 //        return "redirect:displayDvdLibrary";
 //    }
-    
-    
     @RequestMapping(value = "/displayDvdLibrary", method = RequestMethod.GET)
     public String displayDvdLibrary(Model model) {
         String temp = System.getProperty("user.dir");
 
         Dvd[] dvdLibrary = dao.getAllDVDs();
-
 
         model.addAttribute("dvdLibrary", dvdLibrary);
 
@@ -63,15 +66,32 @@ public class HomeControllerWithoutAjax {
 
     }
 
+    @InitBinder
+    public void initBinder(WebDataBinder binder) {
+        binder.registerCustomEditor(Date.class,
+                new CustomDateEditor(new SimpleDateFormat("MM-dd-yyyy"), true, 10));
+    }
+
     @RequestMapping(value = "/addNewDvd", method = RequestMethod.POST)
-    public String addDvd(HttpServletRequest req) throws IOException {
+    public String addDvd(@Valid Dvd dvd, BindingResult result, HttpServletRequest req) throws IOException, ParseException {
+
+        if (result.hasErrors()) {
+            return "addNewDvd";
+        }
+        //DateFormat df = new SimpleDateFormat("MM-dd-yyyy");
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
 
         String title = req.getParameter("title");
-        String releaseDate = req.getParameter("releaseDate");
+        
+        String stringDate = req.getParameter("releaseDate");
+        Date releaseDate = df.parse(stringDate);
+        
         String mpaaRating = req.getParameter("mpaaRating");
         String directorName = req.getParameter("directorName");
         String studio = req.getParameter("studio");
         String userNote = req.getParameter("userNote");
+
+        
 
         ArrayList<String> noteList = new ArrayList<>();
         noteList.add(userNote);
@@ -79,7 +99,8 @@ public class HomeControllerWithoutAjax {
         Dvd newDvd = new Dvd();
 
         newDvd.setTitle(title);
-        //newDvd.setReleaseDate(LocalDate.parse(releaseDate));
+        newDvd.setReleaseDate(releaseDate);
+
         //newDvd.setReleaseDate(releaseDate);
         newDvd.setMpaaRating(mpaaRating);
         newDvd.setDirectorName(directorName);

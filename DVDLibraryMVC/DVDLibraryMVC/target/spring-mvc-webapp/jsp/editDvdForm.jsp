@@ -41,7 +41,7 @@
                     <div class="form-group">
                         <label for="add-releaseDate" class="col-md-4 control-label">Release Date:</label>
                         <div class="col-md-8">
-                            <sf:input type="text"
+                            <sf:input type="date"
                                    class="form-control"
                                    id="add-releaseDate"
                                    path="releaseDate"
