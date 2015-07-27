@@ -54,10 +54,17 @@
                         </div>
                         <div class="form-group">
                             <label for="add-release-date" class="col-md-4 control-label">
+                            </label>
+                            <div class="col-md-8">
+                                <input type="hidden" class="form-control" id="add-release-date" placeholder="Release Date">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="add-final-date" class="col-md-4 control-label">
                                 Release Date:
                             </label>
                             <div class="col-md-8">
-                                <input type="date" class="form-control" id="add-release-date" placeholder="Release Date">
+                                <input type="date" class="form-control" id="add-final-date" placeholder="Release Date">
                             </div>
                         </div>
                         <div class="form-group">
@@ -176,7 +183,7 @@
                                 <label for="edit-release-date" class="col-md-4 control-label">Release Date</label> 
                                 <div class="col-md-8">
                                     <input type="date" class="form-control" id="edit-release-date" placeholder="Release Date"/>
-
+                                    
                                 </div>
                             </div>
                             <div class="form-group">
@@ -242,15 +249,13 @@
                                     <th>Action</th>
                                 </tr> 
                                 </thead>
-                                <tbody>
-                                    
-                                </tbody>
+                                <tbody></tbody>
                             </table>
                         </form>
                     </div>
                     <div class="form-group">
                         <div class="col-md-offset-4 col-md-8">
-                            <button type="submit" id="edit-note-button" class="btn btn-default" data-dismiss="modal">Edit User Note</button>
+                            <button type="submit" id="edit-note-button" class="btn btn-default" data-dismiss="modal">Add User Note</button>
                             <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
                             <input type="hidden" id="edit-note-dvd-id"/>
                         </div>

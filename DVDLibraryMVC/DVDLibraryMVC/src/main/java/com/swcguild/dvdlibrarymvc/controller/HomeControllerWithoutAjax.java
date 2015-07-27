@@ -6,14 +6,15 @@ import java.io.IOException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.format.DateTimeFormatter;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -71,7 +72,6 @@ public class HomeControllerWithoutAjax {
         binder.registerCustomEditor(Date.class,
                 new CustomDateEditor(new SimpleDateFormat("MM-dd-yyyy"), true, 10));
     }
-
     @RequestMapping(value = "/addNewDvd", method = RequestMethod.POST)
     public String addDvd(@Valid Dvd dvd, BindingResult result, HttpServletRequest req) throws IOException, ParseException {
 
@@ -79,19 +79,17 @@ public class HomeControllerWithoutAjax {
             return "addNewDvd";
         }
         //DateFormat df = new SimpleDateFormat("MM-dd-yyyy");
-        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+        //DateFormat df = new SimpleDateFormat("MM-dd-yyyy");
 
         String title = req.getParameter("title");
-        
+
         String stringDate = req.getParameter("releaseDate");
-        Date releaseDate = df.parse(stringDate);
-        
+        LocalDate releaseDate = LocalDate.parse(stringDate);
+
         String mpaaRating = req.getParameter("mpaaRating");
         String directorName = req.getParameter("directorName");
         String studio = req.getParameter("studio");
         String userNote = req.getParameter("userNote");
-
-        
 
         ArrayList<String> noteList = new ArrayList<>();
         noteList.add(userNote);
@@ -100,6 +98,8 @@ public class HomeControllerWithoutAjax {
 
         newDvd.setTitle(title);
         newDvd.setReleaseDate(releaseDate);
+
+        newDvd.setFinalDate(convertDate(releaseDate));
 
         //newDvd.setReleaseDate(releaseDate);
         newDvd.setMpaaRating(mpaaRating);
@@ -112,6 +112,12 @@ public class HomeControllerWithoutAjax {
 
         return "redirect:displayDvdLibrary";
 
+    }
+
+    public Date convertDate(LocalDate releaseDate) {
+        Instant instant = releaseDate.atStartOfDay(ZoneId.systemDefault()).toInstant();
+        Date finalDate = Date.from(instant);
+        return finalDate;
     }
 
     @RequestMapping(value = "/displayNewDvd", method = RequestMethod.GET)

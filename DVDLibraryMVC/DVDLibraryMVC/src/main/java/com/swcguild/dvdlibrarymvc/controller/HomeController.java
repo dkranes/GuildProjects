@@ -7,7 +7,11 @@ package com.swcguild.dvdlibrarymvc.controller;
 
 import com.swcguild.dvdlibrarymvc.dao.DvdLibraryDao;
 import com.swcguild.dvdlibrarymvc.model.Dvd;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.Date;
 import javax.inject.Inject;
 import javax.validation.Valid;
 import org.springframework.http.HttpStatus;
@@ -47,16 +51,29 @@ public class HomeController {
 
     @RequestMapping(value = "/dvd", method = RequestMethod.POST)
     @ResponseBody
-    public Dvd addDvd(@Valid @RequestBody Dvd dvd) {
+    public Dvd addDvd(/*@Valid*/ @RequestBody Dvd dvd) {
 
+//        LocalDate releaseDate = dvd.getReleaseDate();
+//        
+//        Date finalDate = convertDate(releaseDate);
+//        
+//        dvd.setFinalDate(finalDate);
+        
+        
         dao.addDVD(dvd);
         return dvd;
     }
     
+    public Date convertDate(LocalDate releaseDate) {
+        Instant instant = releaseDate.atStartOfDay(ZoneId.systemDefault()).toInstant();
+        Date finalDate = Date.from(instant);
+        return finalDate;
+    }
+
     @RequestMapping(value = "/dvd/{id}", method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void addDvdNote(@PathVariable("id") int id, @RequestBody String note){
-        
+    public void addDvdNote(@PathVariable("id") int id, @RequestBody String note) {
+
         dao.addUserNote(id, note);
     }
 
@@ -78,13 +95,13 @@ public class HomeController {
     public Dvd[] getAllDvds() {
         return dao.getAllDVDs();
     }
-    
+
     @RequestMapping(value = "/dvdNotes/{id}", method = RequestMethod.GET)
     @ResponseBody
-    public ArrayList<String>getAllNotesByDvdId(@PathVariable("id") int id){
-        
+    public ArrayList<String> getAllNotesByDvdId(@PathVariable("id") int id) {
+
         return dao.findDVDByID(id).getAllUserNotes();
-        
+
     }
 
 }

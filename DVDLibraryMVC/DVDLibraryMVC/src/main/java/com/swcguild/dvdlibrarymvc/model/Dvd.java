@@ -5,6 +5,8 @@
  */
 package com.swcguild.dvdlibrarymvc.model;
 
+import java.time.LocalDate;
+import java.time.temporal.Temporal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Objects;
@@ -15,6 +17,7 @@ import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.DateTimeFormat.ISO;
 
 /**
  *
@@ -31,13 +34,21 @@ public class Dvd {
     @Length(max = 50, message = "Title must be no more than 50 characters")
     private String title;
 
-    @NotNull(message = "You must supply a value for Release Date")
-    @DateTimeFormat(pattern = "MM-dd-yyyy")
+    
     //@Temporal(TemporalType.DATE)
     @Past(message = "You must supply a value for Release Date")
-    //@Future(message = "You must supply a current or past date for Release Date...bitch")
-    //@Lazy
-    private Date releaseDate;
+    @Future(message = "You must supply a current or past date for Release Date...bitch")
+    @Lazy
+    @NotNull(message = "You must supply a value for Release Date")
+    @DateTimeFormat(iso = ISO.DATE)//(pattern = "MM-dd-yyyy")
+    private Date finalDate;
+    private LocalDate releaseDate;
+    
+    
+    
+    
+    //private LocalDate releaseDateForJs;
+    
 
     @NotEmpty(message = "You must supply a value for MPAA Rating")
     @Length(max = 20, message = "MPAA Rating must be no more than 20 characters")
@@ -124,11 +135,11 @@ public class Dvd {
         this.title = title;
     }
 
-    public Date getReleaseDate() {
+    public LocalDate getReleaseDate() {
         return releaseDate;
     }
 
-    public void setReleaseDate(Date releaseDate) {
+    public void setReleaseDate(LocalDate releaseDate) {
         this.releaseDate = releaseDate;
     }
 
@@ -162,6 +173,17 @@ public class Dvd {
 
     public Integer getDvdId() {
         return id;
+    }
+
+    public Date getFinalDate() {
+        return finalDate;
+    }
+
+    public void setFinalDate(Date finalDate) {
+
+
+        
+        this.finalDate = finalDate;
     }
 
 }

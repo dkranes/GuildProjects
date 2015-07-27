@@ -3,9 +3,78 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-function dateFormatter(releaseDate) {
+function dateFormatter(finalDate) {
 
-    var now = new Date(releaseDate)
+    //var time = releaseDate.getTime();
+
+
+
+//    var vals = Object.keys(releaseDate).map(function (key) {
+//        return releaseDate[key];
+//    });
+//
+//    var month = vals[7];
+//    var day = vals[2];
+//    var year = vals[0];
+//    return month+"-"+day+"-"+year;
+    
+    
+    var now = new Date(finalDate)
+
+    var day = ("0" + (now.getDate() + 1)).slice(-2);
+    var month = ("0" + (now.getMonth() + 1)).slice(-2);
+
+    return now.getFullYear() + "-" + (month) + "-" + (day);
+    
+    
+    
+    
+//    return year + "-" + month + "-" + day;
+
+//    var now = new Date(finalDate);
+//    
+//    var day = ("0" + (now.getDate() + 1)).slice(-2);
+//    var month = ("0" + (now.getMonth() + 1)).slice(-2);
+//
+//    return now.getFullYear() + "-" + (month) + "-" + (day);
+//
+//    //LocalDate = function(){};
+//    var dateString = releaseDate.valueOf(releaseDate).toString();
+//
+//
+//    var jsDate; //= releaseDate.toLocaleDateString('en-US');
+//    var now = new Date(jsDate.valueOf(releaseDate.toString()));  //.toLocaleDateString('en-US');
+//
+//    var variant = "short";
+//    var dtf = new DateTimeFormat;
+//
+//    //var fixedDate;
+//    var stupid = dtf.formatDate(releaseDate, variant);
+//
+////    var options = {month:"numeric", day:"numeric", year:"numeric"};
+////    //now.toLocaleDateString('en-US', options);
+////    var day = ("0" + (now.getDate() + 1)).slice(-2);
+////    var month = ("0" + (now.getMonth() + 1)).slice(-2);
+////    return now.getFullYear() + "-" + (month) + "-" + (day);
+//    return stupid;
+
+}
+
+function dateFormatter2(releaseDate){
+    var vals = Object.keys(releaseDate).map(function (key) {
+        return releaseDate[key];
+    });
+
+    var month = vals[7];
+    var day = vals[2];
+    var year = vals[0];
+    return year+"-"+month+"-"+day;
+    
+}
+
+function dateFormatter3(finalDate) {
+
+    var now = new Date(finalDate)
 
     var day = ("0" + (now.getDate() + 1)).slice(-2);
     var month = ("0" + (now.getMonth() + 1)).slice(-2);
@@ -123,7 +192,8 @@ $(document).ready(function () {
             cache: 'false',
             data: JSON.stringify({
                 title: $('#add-title').val(),
-                releaseDate: $('#add-release-date').val(),
+                
+                finalDate: $('#add-final-date').val(),
                 mpaaRating: $('#add-mpaa-rating').val(),
                 directorName: $('#add-director-name').val(),
                 studio: $('#add-studio').val(),
@@ -138,7 +208,8 @@ $(document).ready(function () {
         }).success(function (data, status) {
 
             $('#add-title').val('');
-            $('#add-release-date').val('');
+           
+            $('#add-final-date').val('');
             $('#add-mpaa-rating').val('');
             $('#add-director-name').val('');
             $('#add-studio').val('');
@@ -199,10 +270,11 @@ $(document).ready(function () {
             type: 'GET',
             url: 'dvd/' + dvdId
         }).success(function (dvd) {
+            var releaseDate = dateFormatter(dvd.releaseDate);
             modal.find('#dvd-id').text(dvdId);
             modal.find('#edit-dvd-id').val(dvdId);
             modal.find('#edit-title').val(dvd.title);
-            modal.find('#edit-release-date').val(dateFormatter(dvd.releaseDate));
+            modal.find('#edit-release-date').val(releaseDate);
             modal.find('#edit-mpaa-rating').val(dvd.mpaaRating);
             modal.find('#edit-director-name').val(dvd.directorName);
             modal.find('#edit-studio').val(dvd.studio);
@@ -271,16 +343,16 @@ $(document).ready(function () {
             modal.find('#dvd-id').text(dvdId);
             modal.find('#edit-note-dvd-id').val(dvdId);
 
-                $.each(dvdNotes, function (index, note) {
-                    $('#editTable tbody')
-                            .append($('<tr/>')
-                            .append($('<td/>').text(note))
-                            .append($('<td/>')
-                            .append($('<button class="btn btn-edit"></button>').text('Edit'))
-                            .append($('<button class="btn btn-delete"></button>').text('Delete'))));
+            $.each(dvdNotes, function (index, note) {
+                $('#editTable tbody')
+                        .append($('<tr/>')
+                                .append($('<td/>').text(note))
+                                .append($('<td/>')
+                                        .append($('<button class="btn btn-edit"></button>').text('Edit'))
+                                        .append($('<button class="btn btn-delete"></button>').text('Delete'))));
 
-                });
-            
+            });
+
         });
         $('#editTable tbody').empty();
 
